@@ -5,7 +5,7 @@ require('dotenv').config();
 
 var app = express();
 
-// Multer setup
+
 const upload = multer({ dest: 'uploads/' });
 
 app.use(cors());
@@ -15,7 +15,6 @@ app.get('/', function (req, res) {
   res.sendFile(process.cwd() + '/views/index.html');
 });
 
-// ✅ API endpoint to handle file upload
 app.post('/api/fileanalyse', upload.single('upfile'), function (req, res) {
   if (!req.file) {
     return res.status(400).json({ error: 'No file uploaded' });
