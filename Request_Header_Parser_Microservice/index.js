@@ -2,14 +2,14 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 
-app.use(cors()); // Enable CORS for FCC testing
+app.use(cors()); 
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/views/index.html');
 });
 
-// API endpoint for whoami
+
 app.get('/api/whoami', (req, res) => {
   res.json({
     ipaddress: req.ip,
