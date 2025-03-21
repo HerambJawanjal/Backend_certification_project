@@ -15,15 +15,14 @@ app.get('/', (req, res) => {
   res.sendFile(process.cwd() + '/views/index.html');
 });
 
-// In-memory storage for URLs
+
 let urlDatabase = {};
 let counter = 1;
 
-// POST endpoint to shorten URL
+
 app.post('/api/shorturl', (req, res) => {
   const original_url = req.body.url;
 
-  // Validate URL format (should start with http:// or https://)
   const urlPattern = /^https?:\/\/([\w.-]+)/;
   const match = original_url.match(urlPattern);
 
@@ -33,7 +32,7 @@ app.post('/api/shorturl', (req, res) => {
 
   const hostname = match[1];
 
-  // DNS lookup to verify the URL
+
   dns.lookup(hostname, (err) => {
     if (err) {
       return res.json({ error: 'invalid url' });
@@ -45,7 +44,7 @@ app.post('/api/shorturl', (req, res) => {
   });
 });
 
-// GET endpoint to redirect to the original URL
+
 app.get('/api/shorturl/:short_url', (req, res) => {
   const short_url = req.params.short_url;
   const original_url = urlDatabase[short_url];
